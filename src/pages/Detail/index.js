@@ -19,7 +19,7 @@ export default function Detail() {
             </View>
 
             <View style={styles.textBoard}>
-                <Text>{addHyphen.substring(3,0)+"-"+ addHyphen.substring(3, 7)}</Text>
+                <Text>{addHyphen.substring(3, 0) + "-" + addHyphen.substring(3, 7)}</Text>
             </View>
 
             <View style={styles.Main}>

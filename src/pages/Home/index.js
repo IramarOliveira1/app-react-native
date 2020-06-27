@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity, Text, View, ImageBackground, TextInput } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View, ImageBackground, TextInput, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
 
@@ -51,7 +51,6 @@ export default function Home() {
     >
 
       <View style={styles.inputText}>
-
         <TextInput
           placeholder="Informe sua placa"
           value={search}
@@ -60,7 +59,8 @@ export default function Home() {
       </View>
       <View>
         <TouchableOpacity style={styles.button} onPress={searchBoard}>
-          <Text style={styles.colorText} >  {loading ? "Carregando..." : "Pesquisar"}</Text>
+          <ActivityIndicator animating={loading} size="large" color="#FFF" />
+          <Text style={styles.colorText} >  {loading ? "" : "Pesquisar"}</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
 
   colorText: {
     color: '#FFF',
-    fontSize: 15
+    fontSize: 15,
+    bottom: 25,
   },
 
   inputText: {
