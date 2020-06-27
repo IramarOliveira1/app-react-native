@@ -7,6 +7,8 @@ export default function Detail() {
 
     const routeParams = route.params;
 
+    const addHyphen = routeParams.placa;
+
     return (
         <View style={styles.container}>
             <View style={routeParams.situacao === 'Sem restrição' ? styles.noRestrict : styles.restrict}>
@@ -17,7 +19,7 @@ export default function Detail() {
             </View>
 
             <View style={styles.textBoard}>
-                <Text>{routeParams.placa}</Text>
+                <Text>{addHyphen.substring(3,0)+"-"+ addHyphen.substring(3, 7)}</Text>
             </View>
 
             <View style={styles.Main}>
