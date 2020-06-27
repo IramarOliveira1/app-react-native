@@ -10,20 +10,20 @@ export default function Home() {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
 
-  async function searchPlate() {
+  async function searchBoard() {
     setLoading(true);
 
     if (!search) {
       setLoading(false);
-      alert('Preencha o campo de busca!');
+      alert('Preencha o campo vazio!');
       return false;
     }
 
     await axios.get(`https://apicarros.com/v1/consulta/${search}/json`).then(response => {
 
-      const { cor, placa, municipio, modelo, chassi, situacao, uf, ano } = response.data
+      const { cor, placa, municipio, modelo, chassi, situacao, uf, ano, marca, anoModelo } = response.data
 
-      navigation.navigate('Detail', {
+      navigation.navigate('Voltar', {
         cor,
         placa,
         municipio,
@@ -31,13 +31,15 @@ export default function Home() {
         chassi,
         situacao,
         uf,
-        ano
+        ano,
+        marca,
+        anoModelo
       });
 
       setSearch('');
       setLoading(false);
     }).catch((err) => {
-      alert('Placa não confere!');
+      alert('Placa incorreta!');
       setLoading(false);
     });
   }
@@ -57,8 +59,8 @@ export default function Home() {
         />
       </View>
       <View>
-        <TouchableOpacity style={styles.button} onPress={searchPlate}>
-          <Text style={styles.colorButton} >  {loading ? "Loading..." : "Pesquisar"}</Text>
+        <TouchableOpacity style={styles.button} onPress={searchBoard}>
+          <Text style={styles.colorText} >  {loading ? "Carregando..." : "Pesquisar"}</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
 
-  colorButton: {
+  colorText: {
     color: '#FFF',
     fontSize: 15
   },
