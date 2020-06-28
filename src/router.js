@@ -11,12 +11,9 @@ const AppStack = createStackNavigator();
 const Routes = () => {
     return (
         <NavigationContainer>
-            <AppStack.Navigator
-                headerMode="screen"
-                
-            >
-                <AppStack.Screen name="Home" component={Home} />
-                <AppStack.Screen name="Voltar" component={Detail} />
+            <AppStack.Navigator headerMode="screen">
+                <AppStack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+                <AppStack.Screen name="Detalhes" component={Detail} />
             </AppStack.Navigator>
         </NavigationContainer>
     )

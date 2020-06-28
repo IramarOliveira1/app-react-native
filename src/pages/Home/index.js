@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, Text, View, ImageBackground, TextInput, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
+import { RectButton } from 'react-native-gesture-handler';
+import DropdownAlert from 'react-native-dropdownalert';
 
 export default function Home() {
 
@@ -9,13 +11,14 @@ export default function Home() {
 
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
+  const [notification, setNotification] = useState('');
 
   async function searchBoard() {
     setLoading(true);
 
     if (!search) {
       setLoading(false);
-      alert('Preencha o campo vazio!');
+      notification.alertWithType('info', 'Atenção', 'Preencha todos os campos!');
       return false;
     }
 
@@ -23,7 +26,7 @@ export default function Home() {
 
       const { cor, placa, municipio, modelo, chassi, situacao, uf, ano, marca, anoModelo } = response.data
 
-      navigation.navigate('Voltar', {
+      navigation.navigate('Detalhes', {
         cor,
         placa,
         municipio,
@@ -39,7 +42,7 @@ export default function Home() {
       setSearch('');
       setLoading(false);
     }).catch((err) => {
-      alert('Placa incorreta!');
+      notification.alertWithType('error', 'Ooops...', 'Placa Incorreta!');
       setLoading(false);
     });
   }
@@ -50,6 +53,10 @@ export default function Home() {
       style={styles.container}
     >
 
+      <DropdownAlert
+        ref={ref => setNotification(ref)}
+      />
+
       <View style={styles.inputText}>
         <TextInput
           placeholder="Informe sua placa"
@@ -58,10 +65,10 @@ export default function Home() {
         />
       </View>
       <View>
-        <TouchableOpacity style={styles.button} onPress={searchBoard}>
-          <ActivityIndicator animating={loading} size="large" color="#FFF" />
-          <Text style={styles.colorText} >  {loading ? "" : "Pesquisar"}</Text>
-        </TouchableOpacity>
+        <RectButton style={styles.button} onPress={searchBoard}>
+          <ActivityIndicator style={{ bottom: 5 }} animating={loading} size="large" color="#FFF" />
+          <Text style={styles.colorText} >{loading ? "" : "Pesquisar"}</Text>
+        </RectButton>
       </View>
     </ImageBackground>
   );
@@ -87,7 +94,7 @@ const styles = StyleSheet.create({
   colorText: {
     color: '#FFF',
     fontSize: 15,
-    bottom: 25,
+    bottom: 28,
   },
 
   inputText: {
