@@ -12,7 +12,7 @@ export default function Home() {
 
   const navigation = useNavigation();
 
-  const [search, setSearch] = useState('pls1050');
+  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState('');
 
@@ -77,6 +77,7 @@ export default function Home() {
               options={{
                 mask: "AAA9*99",
               }}
+              autoCapitalize='characters'
               value={search}
               onChangeText={text => setSearch(text)}
             />
@@ -130,7 +131,6 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     height: 50,
     paddingHorizontal: 20,
-    textTransform: 'uppercase',
   },
 
   button: {
