@@ -13,8 +13,6 @@ export default function Detail() {
 
     const routeParams = route.params;
 
-    const addHyphen = routeParams.placa;
-
     function handleNavigateBack() {
         navigation.goBack();
     }
@@ -22,35 +20,35 @@ export default function Detail() {
     return (
         <SafeAreaView style={styles.container} >
 
-            <View style={routeParams.situacao ? styles.restrict : styles.noRestrict} >
-                {routeParams.situacao
+            <View style={routeParams.situacao === 'Situação OK' || routeParams.situacao === 'Sem restrição' ? styles.noRestrict : styles.restrict} >
+                {routeParams.situacao === 'Situação OK' || routeParams.situacao === 'Sem restrição'
                     ?
                     (<>
                         <Text style={styles.textRestrict}>
-                            Veiculo com restrição
+                            Veículo sem restrição
                         </Text>
                         <Text style={styles.textRestrict}>
                             de roubo ou furto
                         </Text>
+
                     </>)
                     :
                     (<>
-
                         <Text style={styles.textRestrict}>
-                            Veiculo sem restrição
+                            Veículo com restrição
                         </Text>
                         <Text style={styles.textRestrict}>
                             de roubo ou furto
                         </Text>
-
                     </>)
+
                 }
             </View>
 
             <View style={styles.content}>
                 <View style={styles.carLicensePlate}>
                     <Text style={{ fontWeight: "bold", fontSize: 28, color: "#133C55" }}>
-                        {addHyphen.substring(3, 0) + "-" + addHyphen.substring(3, 7)}
+                        {routeParams.placa.substring(3, 0) + "-" + routeParams.placa.substring(3, 7)}
                     </Text>
                 </View>
 
