@@ -22,9 +22,20 @@ export default function Detail() {
     return (
         <SafeAreaView style={styles.container} >
 
-            <View style={routeParams.situacao === 'Sem restrição' ? styles.noRestrict : styles.restrict}>
-                {routeParams.situacao === 'Sem restrição'
-                    ? (<>
+            <View style={routeParams.situacao === 'Roubo/Furto' ? styles.restrict : styles.noRestrict} >
+                {routeParams.situacao === 'Roubo/Furto'
+                    ?
+                    (<>
+                        <Text style={styles.textRestrict}>
+                            Veiculo com restrição
+                        </Text>
+                        <Text style={styles.textRestrict}>
+                            de roubo ou furto
+                        </Text>
+                    </>)
+                    :
+                    (<>
+
                         <Text style={styles.textRestrict}>
                             Veiculo sem restrição
                         </Text>
@@ -32,14 +43,6 @@ export default function Detail() {
                             de roubo ou furto
                         </Text>
 
-                    </>)
-                    : (<>
-                        <Text style={styles.textRestrict}>
-                            Veiculo com restrição
-                        </Text>
-                        <Text style={styles.textRestrict}>
-                            de roubo ou furto
-                        </Text>
                     </>)
                 }
             </View>
