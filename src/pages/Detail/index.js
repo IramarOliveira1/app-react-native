@@ -22,8 +22,8 @@ export default function Detail() {
     return (
         <SafeAreaView style={styles.container} >
 
-            <View style={routeParams.situacao === 'Roubo/Furto' ? styles.restrict : styles.noRestrict} >
-                {routeParams.situacao === 'Roubo/Furto'
+            <View style={routeParams.situacao ? styles.restrict : styles.noRestrict} >
+                {routeParams.situacao
                     ?
                     (<>
                         <Text style={styles.textRestrict}>
