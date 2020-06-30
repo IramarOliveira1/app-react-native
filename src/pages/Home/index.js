@@ -8,13 +8,11 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import { TextInputMask } from 'react-native-masked-text'
 
-// import logo from '../../../assets/logo.jpeg'
-
 export default function Home() {
 
   const navigation = useNavigation();
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('pls1050');
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState('');
 
@@ -31,7 +29,7 @@ export default function Home() {
 
       const { cor, placa, municipio, modelo, chassi, situacao, uf, ano, marca, anoModelo } = response.data
 
-      navigation.navigate('Detalhes', {
+      navigation.navigate('Detail', {
         cor,
         placa,
         municipio,
@@ -77,24 +75,21 @@ export default function Home() {
               style={styles.input}
               type={'custom'}
               options={{
-                mask: "AAA9999",
+                mask: "AAA9*99",
               }}
               value={search}
               onChangeText={text => setSearch(text)}
             />
 
-            <View style={styles.button}>
-              <TouchableOpacity onPress={handleSearchBoard}>
-                {loading
-                  ? <ActivityIndicator animating={loading} size="large" color="#133C55" style={{ top: 8 }} />
-                  : <FontAwesome name="search" size={32} color="#133C55" style={{ top: 8 }} />
-                }
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={styles.button} onPress={handleSearchBoard}>
+              {loading
+                ? <ActivityIndicator animating={loading} size="large" color="#133C55" />
+                : <FontAwesome name="search" size={32} color="#133C55" />
+              }
+            </TouchableOpacity>
           </View>
 
         </View>
-
       </SafeAreaView>
     </>
   );
@@ -135,6 +130,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     height: 50,
     paddingHorizontal: 20,
+    textTransform: 'uppercase',
   },
 
   button: {
@@ -144,5 +140,6 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 5,
     borderBottomEndRadius: 5,
     alignItems: 'center',
+    justifyContent: 'center',
   },
 });

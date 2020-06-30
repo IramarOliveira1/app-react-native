@@ -1,11 +1,9 @@
 {
   "expo": {
-    "name": "searchBoard",
-    "slug": "searchBoard",
+    "name": "Consultar Placas Brasil",
+    "slug": "Consultar-Placas-Brasil",
     "platforms": [
-      "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,6 +21,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.soterosystems.consultarplacasbrasil",
+      "versionCode": 1
     }
   }
 }

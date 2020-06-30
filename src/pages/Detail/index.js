@@ -1,126 +1,156 @@
 import React from 'react';
-import { useRoute } from '@react-navigation/native';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
+
+import { FontAwesome, Ionicons, Entypo, FontAwesome5 } from '@expo/vector-icons';
+
+import Information from '../../components/Information';
 
 export default function Detail() {
     const route = useRoute();
+    const navigation = useNavigation();
 
     const routeParams = route.params;
 
     const addHyphen = routeParams.placa;
 
+    function handleNavigateBack() {
+        navigation.goBack();
+    }
+
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container} >
+
             <View style={routeParams.situacao === 'Sem restrição' ? styles.noRestrict : styles.restrict}>
-                <Text style={styles.textRestrict}>{routeParams.situacao === 'Sem restrição'
-                    ? 'Veículo sem restrição de roubo ou furto'
-                    : 'Veículo com restrição de roubo'}
-                </Text>
+                {routeParams.situacao === 'Sem restrição'
+                    ? (<>
+                        <Text style={styles.textRestrict}>
+                            Veiculo sem restrição
+                        </Text>
+                        <Text style={styles.textRestrict}>
+                            de roubo ou furto
+                        </Text>
+
+                    </>)
+                    : (<>
+                        <Text style={styles.textRestrict}>
+                            Veiculo com restrição
+                        </Text>
+                        <Text style={styles.textRestrict}>
+                            de roubo ou furto
+                        </Text>
+                    </>)
+                }
             </View>
 
-            <View style={styles.textBoard}>
-                <Text>{addHyphen.substring(3, 0) + "-" + addHyphen.substring(3, 7)}</Text>
-            </View>
+            <View style={styles.content}>
+                <View style={styles.carLicensePlate}>
+                    <Text style={{ fontWeight: "bold", fontSize: 28, color: "#133C55" }}>
+                        {addHyphen.substring(3, 0) + "-" + addHyphen.substring(3, 7)}
+                    </Text>
+                </View>
 
-            <View style={styles.Main}>
-                <FlatList
-                    data={[
-                        { key: 'Marca/Modelo:' },
-                        { key: 'Cor:' },
-                        { key: 'Ano:' },
-                        { key: 'Chassi:' },
-                        { key: 'Cidade/Estado:' },
-                    ]}
-                    renderItem={({ item }) => <Text style={styles.fontPrimary} >{item.key}</Text>}
+                <Information
+                    title="Marca/Modelo"
+                    information={routeParams.modelo}
+                    Icon={<Ionicons name="logo-model-s"
+                        color={"#133C55"}
+                        size={28} />}
+                />
+                <Information
+                    title="Cor"
+                    information={routeParams.cor} Icon={<Ionicons name="ios-color-fill" color={"#133C55"} size={28} />}
                 />
 
-                <View style={styles.mainSecond}>
-                    <Text style={styles.fontSecond}>{routeParams.modelo}</Text>
-                    <Text style={styles.fontSecond}>{routeParams.cor}</Text>
-                    <Text style={styles.fontSecond}>{routeParams.ano ? routeParams.ano : routeParams.anoModelo}</Text>
-                    <Text style={styles.fontSecond}>{routeParams.chassi}</Text>
-                    <Text style={styles.fontSecond}>{routeParams.municipio + " / " + routeParams.uf}</Text>
-                </View>
+                <Information
+                    title="Ano"
+                    information={routeParams.ano ? routeParams.ano : routeParams.anoModelo}
+                    Icon={<Entypo name="calendar" color={"#133C55"} size={28} />}
+                />
+
+                <Information
+                    title="Chassi"
+                    information={routeParams.chassi}
+                    Icon={<FontAwesome name="gear" color={"#133C55"} size={28} />}
+                />
+
+                <Information
+                    title="Cidade e Estado"
+                    information={routeParams.municipio + " - " + routeParams.uf}
+                    Icon={<FontAwesome5 name="map-marker-alt" color={"#133C55"} size={28} />}
+                />
+
+                <RectButton style={styles.button} onPress={handleNavigateBack}>
+                    <Text style={styles.buttonText}>Pesquisar Novamente</Text>
+                </RectButton>
             </View>
 
-        </View >
+        </SafeAreaView >
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
-        marginTop: 50,
+        backgroundColor: "#FFF",
     },
 
     noRestrict: {
-        backgroundColor: 'green',
-        width: '100%',
-        alignItems: 'center',
-        bottom: 50,
-        padding: 20
+        backgroundColor: "rgba(45, 206, 137, 0.3)",
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "15%",
+        padding: 20,
     },
 
     restrict: {
-        backgroundColor: 'red',
-        width: '100%',
-        alignItems: 'center',
-        bottom: 50,
-        padding: 20
+        backgroundColor: "rgba(245, 54, 92, 0.3)",
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "15%",
+        padding: 20,
     },
 
     textRestrict: {
-        color: '#FFF',
+        color: "#133C55",
         fontWeight: "bold",
         fontSize: 18,
     },
 
-    textBoard: {
-        width: '50%',
+    carLicensePlate: {
+        width: "70%",
         height: 50,
-        backgroundColor: '#BBBCC5',
-        borderWidth: 1,
-        borderRadius: 5,
-        padding: 13,
+        borderRadius: 4,
+        backgroundColor: "#EAF3F8",
+        padding: 6,
         alignSelf: "center",
         alignItems: "center",
     },
 
-    Main: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        top: 20,
-        padding: 10,
+    content: {
+        justifyContent: "space-between",
+        flex: 1,
+        paddingHorizontal: 20,
+        paddingTop: 20,
+        paddingBottom: 40,
     },
 
-    mainSecond: {
-        flexDirection: "column",
-        alignItems: "flex-end",
+    button: {
+        backgroundColor: "#91E5F6",
+        width: "100%",
+        height: 50,
+        borderRadius: 4,
+        alignItems: "center",
     },
 
-    fontPrimary: {
+    buttonText: {
+        color: "#133C55",
         fontSize: 15,
-        fontWeight: 'bold',
-        color: 'red',
-        padding: 5
+        fontWeight: "bold",
+        padding: 15,
     },
-
-    fontSecond: {
-        fontSize: 15,
-        fontWeight: 'bold',
-        color: 'blue',
-        padding: 5,
-    },
-
-    // button: {
-    //     backgroundColor: '#03A9F4',
-    //     width: 300,
-    //     alignItems: 'center',
-    //     height: 50,
-    //     borderRadius: 5,
-    //     padding: 15,
-    //     marginTop: 70,
-    // },
 
 });
