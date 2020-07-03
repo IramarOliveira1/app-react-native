@@ -51,7 +51,7 @@ export default function Home() {
     });
   }
 
-  
+
 
   return (
     <>
@@ -97,7 +97,7 @@ export default function Home() {
       </SafeAreaView>
       <AdMobBanner
         bannerSize="fullBanner"
-        adUnitID="ca-app-pub-4155303486500251/3475984733" 
+        adUnitID="ca-app-pub-4155303486500251/3475984733"
         servePersonalizedAds={true}
       />
     </>

@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import { FontAwesome, Ionicons, Entypo, FontAwesome5 } from '@expo/vector-icons';
-import { PublisherBanner } from 'expo-ads-admob';
+import { AdMobBanner } from 'expo-ads-admob';
 
 import Information from '../../components/Information';
 
@@ -90,11 +90,10 @@ export default function Detail() {
                 </View>
 
             </SafeAreaView >
-            <PublisherBanner
+            <AdMobBanner
                 bannerSize="fullBanner"
-                adUnitID="ca-app-pub-4155303486500251/3475984733" 
+                adUnitID="ca-app-pub-4155303486500251/3475984733"
                 servePersonalizedAds={true}
-
             />
         </>
     );
