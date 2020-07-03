@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import { FontAwesome, Ionicons, Entypo, FontAwesome5 } from '@expo/vector-icons';
+import { PublisherBanner } from 'expo-ads-admob';
 
 import Information from '../../components/Information';
 
@@ -18,76 +19,84 @@ export default function Detail() {
     }
 
     return (
-        <SafeAreaView style={styles.container} >
+        <>
+            <SafeAreaView style={styles.container} >
 
-            <View style={routeParams.situacao === 'Situação OK' || routeParams.situacao === 'Sem restrição' ? styles.noRestrict : styles.restrict} >
-                {routeParams.situacao === 'Situação OK' || routeParams.situacao === 'Sem restrição'
-                    ?
-                    (<>
-                        <Text style={styles.textRestrict}>
-                            Veículo sem restrição
+                <View style={routeParams.situacao === 'Situação OK' || routeParams.situacao === 'Sem restrição' ? styles.noRestrict : styles.restrict} >
+                    {routeParams.situacao === 'Situação OK' || routeParams.situacao === 'Sem restrição'
+                        ?
+                        (<>
+                            <Text style={styles.textRestrict}>
+                                Veículo sem restrição
                         </Text>
-                        <Text style={styles.textRestrict}>
-                            de roubo ou furto
+                            <Text style={styles.textRestrict}>
+                                de roubo ou furto
                         </Text>
 
-                    </>)
-                    :
-                    (<>
-                        <Text style={styles.textRestrict}>
-                            Veículo com restrição
+                        </>)
+                        :
+                        (<>
+                            <Text style={styles.textRestrict}>
+                                Veículo com restrição
                         </Text>
-                        <Text style={styles.textRestrict}>
-                            de roubo ou furto
+                            <Text style={styles.textRestrict}>
+                                de roubo ou furto
                         </Text>
-                    </>)
+                        </>)
 
-                }
-            </View>
-
-            <View style={styles.content}>
-                <View style={styles.carLicensePlate}>
-                    <Text style={{ fontWeight: "bold", fontSize: 28, color: "#133C55" }}>
-                        {routeParams.placa.substring(3, 0) + "-" + routeParams.placa.substring(3, 7)}
-                    </Text>
+                    }
                 </View>
 
-                <Information
-                    title="Marca/Modelo"
-                    information={routeParams.modelo}
-                    Icon={<Ionicons name="logo-model-s"
-                        color={"#133C55"}
-                        size={28} />}
-                />
-                <Information
-                    title="Cor"
-                    information={routeParams.cor} Icon={<Ionicons name="ios-color-fill" color={"#133C55"} size={28} />}
-                />
+                <View style={styles.content}>
+                    <View style={styles.carLicensePlate}>
+                        <Text style={{ fontWeight: "bold", fontSize: 28, color: "#133C55" }}>
+                            {routeParams.placa.substring(3, 0) + "-" + routeParams.placa.substring(3, 7)}
+                        </Text>
+                    </View>
 
-                <Information
-                    title="Ano"
-                    information={routeParams.ano ? routeParams.ano : routeParams.anoModelo}
-                    Icon={<Entypo name="calendar" color={"#133C55"} size={28} />}
-                />
+                    <Information
+                        title="Marca/Modelo"
+                        information={routeParams.modelo}
+                        Icon={<Ionicons name="logo-model-s"
+                            color={"#133C55"}
+                            size={28} />}
+                    />
+                    <Information
+                        title="Cor"
+                        information={routeParams.cor} Icon={<Ionicons name="ios-color-fill" color={"#133C55"} size={28} />}
+                    />
 
-                <Information
-                    title="Chassi"
-                    information={routeParams.chassi}
-                    Icon={<FontAwesome name="gear" color={"#133C55"} size={28} />}
-                />
+                    <Information
+                        title="Ano"
+                        information={routeParams.ano ? routeParams.ano : routeParams.anoModelo}
+                        Icon={<Entypo name="calendar" color={"#133C55"} size={28} />}
+                    />
 
-                <Information
-                    title="Cidade e Estado"
-                    information={routeParams.municipio + " - " + routeParams.uf}
-                    Icon={<FontAwesome5 name="map-marker-alt" color={"#133C55"} size={28} />}
-                />
+                    <Information
+                        title="Chassi"
+                        information={routeParams.chassi}
+                        Icon={<FontAwesome name="gear" color={"#133C55"} size={28} />}
+                    />
 
-                <RectButton style={styles.button} onPress={handleNavigateBack}>
-                    <Text style={styles.buttonText}>Pesquisar Novamente</Text>
-                </RectButton>
-            </View>
+                    <Information
+                        title="Cidade e Estado"
+                        information={routeParams.municipio + " - " + routeParams.uf}
+                        Icon={<FontAwesome5 name="map-marker-alt" color={"#133C55"} size={28} />}
+                    />
 
-        </SafeAreaView >
+                    <RectButton style={styles.button} onPress={handleNavigateBack}>
+                        <Text style={styles.buttonText}>Pesquisar Novamente</Text>
+                    </RectButton>
+                </View>
+
+            </SafeAreaView >
+            <PublisherBanner
+                bannerSize="fullBanner"
+                adUnitID="ca-app-pub-4155303486500251/3475984733" 
+                servePersonalizedAds={true}
+
+            />
+        </>
     );
 }
 

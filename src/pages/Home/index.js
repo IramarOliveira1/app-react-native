@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import DropdownAlert from 'react-native-dropdownalert';
 
 import { FontAwesome } from '@expo/vector-icons';
+import { AdMobBanner } from 'expo-ads-admob';
 
 import { TextInputMask } from 'react-native-masked-text'
 
@@ -50,6 +51,8 @@ export default function Home() {
     });
   }
 
+  
+
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -92,6 +95,11 @@ export default function Home() {
 
         </View>
       </SafeAreaView>
+      <AdMobBanner
+        bannerSize="fullBanner"
+        adUnitID="ca-app-pub-4155303486500251/3475984733" 
+        servePersonalizedAds={true}
+      />
     </>
   );
 }

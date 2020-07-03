@@ -24,7 +24,10 @@
     },
     "android": {
       "package": "com.soterosystems.consultarplacasbrasil",
-      "versionCode": 1
+      "versionCode": 1,
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-4155303486500251~6785508504" 
+      }
     }
   }
 }
