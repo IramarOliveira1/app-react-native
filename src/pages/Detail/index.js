@@ -92,8 +92,9 @@ export default function Detail() {
             </SafeAreaView >
             <AdMobBanner
                 bannerSize="fullBanner"
-                adUnitID="ca-app-pub-4155303486500251/3475984733"
-                servePersonalizedAds={true}
+                adUnitID="ca-app-pub-4155303486500251/3456244379"
+                servePersonalizedAds
+                style={{ backgroundColor: "#FFF" }}
             />
         </>
     );
