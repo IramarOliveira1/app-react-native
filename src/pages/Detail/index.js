@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Vibration } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import { FontAwesome, Ionicons, Entypo, FontAwesome5 } from '@expo/vector-icons';
-import { AdMobBanner } from 'expo-ads-admob';
+import { AdMobBanner, AdMobRewarded } from 'expo-ads-admob';
 
 import Information from '../../components/Information';
 
@@ -14,8 +14,16 @@ export default function Detail() {
 
     const routeParams = route.params;
 
-    function handleNavigateBack() {
-        navigation.goBack();
+    useEffect(() => {
+        AdMobRewarded.addEventListener('rewardedVideoDidClose', () => {
+            navigation.navigate('Home')
+        });
+    }, [AdMobRewarded, navigation])
+
+    async function handleNavigateBack() {
+        await AdMobRewarded.setAdUnitID('ca-app-pub-4155303486500251/2787240471');
+        await AdMobRewarded.requestAdAsync();
+        await AdMobRewarded.showAdAsync();
     }
 
     return (
@@ -28,20 +36,20 @@ export default function Detail() {
                         (<>
                             <Text style={styles.textRestrict}>
                                 Veículo sem restrição
-                        </Text>
+                            </Text>
                             <Text style={styles.textRestrict}>
                                 de roubo ou furto
-                        </Text>
-
+                            </Text>
                         </>)
                         :
                         (<>
                             <Text style={styles.textRestrict}>
                                 Veículo com restrição
-                        </Text>
+                            </Text>
                             <Text style={styles.textRestrict}>
                                 de roubo ou furto
-                        </Text>
+                            </Text>
+                            {Vibration.vibrate(1000, true)}
                         </>)
 
                     }

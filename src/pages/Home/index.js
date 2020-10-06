@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, ActivityIndicator, TouchableOpacity, TextInput, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, ActivityIndicator, TouchableOpacity, SafeAreaView, Button } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
 import DropdownAlert from 'react-native-dropdownalert';
@@ -46,7 +46,7 @@ export default function Home() {
       setSearch('');
       setLoading(false);
     }).catch((err) => {
-      notification.alertWithType('error', 'Ooops...', 'Placa Incorreta!');
+      notification.alertWithType('error', 'Ooops...', 'Placa Invalida favor usar o formato AAA9A99 ou AAA9999 !');
       setLoading(false);
     });
   }
@@ -97,6 +97,7 @@ export default function Home() {
         bannerSize="fullBanner"
         adUnitID="ca-app-pub-4155303486500251/3456244379"
         servePersonalizedAds
+        onDidFailToReceiveAdWithError={(err) => console.log(err)}
         style={{ backgroundColor: "#FFF" }}
       />
     </>
