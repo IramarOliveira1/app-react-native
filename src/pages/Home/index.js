@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, ActivityIndicator, TouchableOpacity, SafeAreaView, Button } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
@@ -16,6 +16,25 @@ export default function Home() {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState('');
+
+  function validate(code, message) {
+    setLoading(false);
+
+    if (code === 401) {
+      notification.alertWithType('error', 'Ooops...', 'Placa inválida favor usar o formato AAA9A99 ou AAA9999.');
+      return false;
+    }
+
+    if (code === 402) {
+      notification.alertWithType('error', 'Ooops...', `${message}` + ".");
+      return false;
+    }
+
+    if (code === 500) {
+      notification.alertWithType('error', 'Ooops...', 'Servidor temporariamente indisponível. Tente novamente em alguns instantes.');
+      return false;
+    }
+  }
 
   async function handleSearchBoard() {
     setLoading(true);
@@ -46,8 +65,7 @@ export default function Home() {
       setSearch('');
       setLoading(false);
     }).catch((err) => {
-      notification.alertWithType('error', 'Ooops...', 'Placa Invalida favor usar o formato AAA9A99 ou AAA9999 !');
-      setLoading(false);
+      validate(err.response.status, err.response.data.message);
     });
   }
 

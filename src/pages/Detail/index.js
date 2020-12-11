@@ -51,10 +51,8 @@ export default function Detail() {
                             </Text>
                             {Vibration.vibrate(1000, true)}
                         </>)
-
                     }
                 </View>
-
                 <View style={styles.content}>
                     <View style={styles.carLicensePlate}>
                         <Text style={{ fontWeight: "bold", fontSize: 28, color: "#133C55" }}>
@@ -65,7 +63,7 @@ export default function Detail() {
                     <Information
                         title="Marca/Modelo"
                         information={routeParams.modelo}
-                        Icon={<Ionicons name="logo-model-s"
+                        Icon={<Ionicons name="car-sport"
                             color={"#133C55"}
                             size={28} />}
                     />
