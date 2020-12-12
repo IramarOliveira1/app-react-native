@@ -23,10 +23,12 @@
       "supportsTablet": true
     },
     "android": {
+      "enableDangerousExperimentalLeanBuilds": true,
+      "permissions": [],
       "package": "com.soterosystems.consultarplacasbrasil",
-      "versionCode": 4,
+      "versionCode": 5,
       "config": {
-        "googleMobileAdsAppId": "ca-app-pub-4155303486500251~6785508504" 
+        "googleMobileAdsAppId": "ca-app-pub-4155303486500251~6785508504"
       }
     }
   }

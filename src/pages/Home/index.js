@@ -45,7 +45,7 @@ export default function Home() {
       return false;
     }
 
-    await axios.get(`https://apicarros.com/v1/consulta/${search}/json`).then(response => {
+    await axios.get(`https://placas-api.vercel.app/api/placas/${search}`).then(response => {
 
       const { cor, placa, municipio, modelo, chassi, situacao, uf, ano, marca, anoModelo } = response.data
 
