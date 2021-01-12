@@ -26,7 +26,7 @@ export default function Home() {
     }
 
     if (code === 402) {
-      notification.alertWithType('error', 'Ooops...', `Nenhum veículo foi encontrado para a placa ${search}` + ".");
+      notification.alertWithType('error', 'Ooops...', `Nenhum veículo foi encontrado para a placa ${search.substring(3, 0) + "-" + search.substring(3, 7)}` + ".");
       return false;
     }
 
