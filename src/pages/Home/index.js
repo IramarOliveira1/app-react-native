@@ -17,7 +17,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState('');
 
-  function validate(code, message) {
+  function validate(code) {
     setLoading(false);
 
     if (code === 401) {
@@ -26,7 +26,7 @@ export default function Home() {
     }
 
     if (code === 402) {
-      notification.alertWithType('error', 'Ooops...', `${message}` + ".");
+      notification.alertWithType('error', 'Ooops...', `Nenhum veículo foi encontrado para a placa ${search}` + ".");
       return false;
     }
 
@@ -65,7 +65,7 @@ export default function Home() {
       setSearch('');
       setLoading(false);
     }).catch((err) => {
-      validate(err.response.status, err.response.data.message);
+      validate(err.response.status);
     });
   }
 

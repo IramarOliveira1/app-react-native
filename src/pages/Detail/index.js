@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, View, SafeAreaView, Vibration } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import { FontAwesome, Ionicons, Entypo, FontAwesome5 } from '@expo/vector-icons';
-import { AdMobBanner, AdMobRewarded } from 'expo-ads-admob';
+import { AdMobBanner } from 'expo-ads-admob';
 
 import Information from '../../components/Information';
 
@@ -14,34 +14,16 @@ export default function Detail() {
 
     const routeParams = route.params;
 
-    useEffect(() => {
-        AdMobRewarded.addEventListener('rewardedVideoDidClose', () => {
-            navigation.navigate('Home')
-        });
-    }, [AdMobRewarded, navigation])
-
-    async function handleNavigateBack() {
-        await AdMobRewarded.setAdUnitID('ca-app-pub-4155303486500251/2787240471');
-        await AdMobRewarded.requestAdAsync();
-        await AdMobRewarded.showAdAsync();
+    function handleNavigateBack() {
+        navigation.navigate('Home')
     }
 
     return (
         <>
             <SafeAreaView style={styles.container} >
-
-                <View style={routeParams.situacao === 'Situação OK' || routeParams.situacao === 'Sem restrição' ? styles.noRestrict : styles.restrict} >
-                    {routeParams.situacao === 'Situação OK' || routeParams.situacao === 'Sem restrição'
+                <View style={routeParams.situacao.toLowerCase().includes('roubo') ? styles.restrict : styles.noRestrict} >
+                    {routeParams.situacao.toLowerCase().includes('roubo')
                         ?
-                        (<>
-                            <Text style={styles.textRestrict}>
-                                Veículo sem restrição
-                            </Text>
-                            <Text style={styles.textRestrict}>
-                                de roubo ou furto
-                            </Text>
-                        </>)
-                        :
                         (<>
                             <Text style={styles.textRestrict}>
                                 Veículo com restrição
@@ -50,6 +32,15 @@ export default function Detail() {
                                 de roubo ou furto
                             </Text>
                             {Vibration.vibrate(1000, true)}
+                        </>)
+                        :
+                        (<>
+                            <Text style={styles.textRestrict}>
+                                Veículo sem restrição
+                            </Text>
+                            <Text style={styles.textRestrict}>
+                                de roubo ou furto
+                            </Text>
                         </>)
                     }
                 </View>

@@ -5,7 +5,7 @@
     "platforms": [
       "android"
     ],
-    "version": "1.0.4",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/iconapp.png",
     "splash": {
@@ -27,7 +27,7 @@
         "android.permission.VIBRATE"
       ],
       "package": "com.soterosystems.consultarplacasbrasil",
-      "versionCode": 6,
+      "versionCode": 7,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-4155303486500251~6785508504"
       }
